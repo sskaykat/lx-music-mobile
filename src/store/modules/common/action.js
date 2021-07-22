@@ -35,6 +35,7 @@ export const TYPES = {
   setIsHandleAudioFocus: null,
   setAddMusicLocationType: null,
   setIsShowLyricTranslation: null,
+  setIsShowDesktopLyric: null,
 }
 for (const key of Object.keys(TYPES)) {
   TYPES[key] = `common__${key}`
@@ -285,6 +286,16 @@ export const setIsShowLyricTranslation = flag => async(dispatch, getState) => {
   dispatch(playerAction.toggleTranslation(flag))
   dispatch({
     type: TYPES.setIsShowLyricTranslation,
+    payload: flag,
+  })
+  const { common } = getState()
+  await setData(settingKey, common.setting)
+}
+
+export const setIsShowDesktopLyric = flag => async(dispatch, getState) => {
+  dispatch(playerAction.toggleDesktopLyric(flag))
+  dispatch({
+    type: TYPES.setIsShowDesktopLyric,
     payload: flag,
   })
   const { common } = getState()
